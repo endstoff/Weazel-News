@@ -53,10 +53,9 @@ end)
 
 RegisterNetEvent('DisplayAdvert')
 AddEventHandler('DisplayAdvert',function(inputText)
---	SetNotificationTextEntry("STRING");
+	SetNotificationTextEntry("STRING");
 	AddTextComponentString(inputText);
---	SetNotificationMessage("CHAR_LIFEINVADER", "CHAR_LIFEINVADER", true, 1, "~w~Weazel ~r~News:~w~", _U("DisplayAdvert"), "");
-	TriggerEvent('est_notify-werbung', '#CCCC00', '<span style="color:yellow"><b>Weazel News</b></span>', inputText)
+	SetNotificationMessage("CHAR_LIFEINVADER", "CHAR_LIFEINVADER", true, 1, "~w~Weazel ~r~News:~w~", _U("DisplayAdvert"), "");
 	DrawNotification(false, true);
 end)
 
