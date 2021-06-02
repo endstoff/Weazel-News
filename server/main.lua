@@ -31,7 +31,7 @@ AddEventHandler('SyncAdvert', function(inputText)
 					},
 						["description"] = "" .. inputText,
 						["footer"] = {
-							["text"] = Config.FooterText .. " • " .. os.date("%d.%m.%Y") .. Config.Footertext2 .. os.date("%H:%M") .. " Uhr",
+							["text"] = Config.FooterText .. " • " .. os.date("%d.%m.%Y") .. " um " .. os.date("%H:%M") .. " Uhr",
 							["icon_url"] = Config.FooterIcon,
 						},
 					}}
