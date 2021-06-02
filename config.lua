@@ -13,7 +13,7 @@ Config.FooterText   = "Werbung Geschalten am"
 Config.FooterIcon   = "https://i.imgur.com/kbwaL85.jpg"
 -- Color
 Config.Color        = 0xF23A3A -- Results in: 0xHEX_COLOR
--- locale (available: en & de)
+-- locale (available: en, de & es)
 Config.Locale       = 'de'
 -- How much the Advert should cost players
 Config.AdvertCosts  = 150
