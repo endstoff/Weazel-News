@@ -25,7 +25,7 @@ end)
 
 RegisterNetEvent("Advert")
 AddEventHandler("Advert", function()
-		DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "max. 150 characters", "", "", "", Config.Characters)
+		DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", Config.Characters)
 		local input = true
 		Citizen.CreateThread(function()
 		while input do
@@ -39,7 +39,7 @@ AddEventHandler("Advert", function()
 		TriggerServerEvent('SyncAdvert', inputText)
 		input = false
 		else
-			DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "max. 150 characters", "", "", "", Config.Characters)
+			DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", Config.Characters)
 		end
 		elseif UpdateOnscreenKeyboard() == 2 then
 		input = false
@@ -105,9 +105,8 @@ end)
 -- Blip
 
 local blips = {
-
-     {title="Weazel News", colour=5, id=682, x = -594.37426757812, y = -929.93981933594, z = 23.86962890625}
-  }
+	{title="Weazel News", colour=5, id=682, x = -594.37426757812, y = -929.93981933594, z = 23.86962890625}
+}
 
 Citizen.CreateThread(function()
 

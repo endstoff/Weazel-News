@@ -1,8 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
-version '1.1'
 author 'endstoff'
+version 'v2.0'
 
 client_scripts {
 	'@es_extended/locale.lua',
