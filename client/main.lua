@@ -25,30 +25,29 @@ end)
 
 RegisterNetEvent("Advert")
 AddEventHandler("Advert", function()
-		DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", Config.Characters)
+	DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", Config.Characters)
 		local input = true
 		Citizen.CreateThread(function()
-		while input do
-		if input == true then
-		HideHudAndRadarThisFrame()
-		if UpdateOnscreenKeyboard() == 3 then
-		input = false
-		elseif UpdateOnscreenKeyboard() == 1 then
-		local inputText = GetOnscreenKeyboardResult()
-		if string.len(inputText) > 0 then
-		TriggerServerEvent('SyncAdvert', inputText)
-		input = false
-		else
-			DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", Config.Characters)
-		end
-		elseif UpdateOnscreenKeyboard() == 2 then
-		input = false
-		end
-		end
-		 Citizen.Wait(0)
-		 end
-			
-end)
+			while input do
+				if input == true then
+					HideHudAndRadarThisFrame()
+					if UpdateOnscreenKeyboard() == 3 then
+						input = false
+					elseif UpdateOnscreenKeyboard() == 1 then
+						local inputText = GetOnscreenKeyboardResult()
+						if string.len(inputText) > 0 then
+							TriggerServerEvent('SyncAdvert', inputText)
+							input = false
+						else
+							DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", Config.Characters)
+						end
+					elseif UpdateOnscreenKeyboard() == 2 then
+						input = false
+					end
+				end
+			Citizen.Wait(0)
+		end	
+	end)
 end)
 
 RegisterNetEvent('DisplayAdvert')
@@ -77,49 +76,46 @@ end)
 --- Marker 
 
 Citizen.CreateThread(function()
-	while true do
-	
-		local isInMarker = false
-		local playerPed      = PlayerPedId()
-		local coords         = GetEntityCoords(playerPed)
+    while true do
+        Citizen.Wait(0)
 
-		Wait(0)
-		DrawMarker(22, -594.46691894531, -930.03179931641, 23.869626998901, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 1.0, 1.0, 1.0, 200, 55, 50, 100, false, true, 2, true, false, false, false)
-		
-		if GetDistanceBetweenCoords(coords, -594.46691894531, -930.03179931641, 23.869626998901, true) < 1.5 then
-			isInMarker = true
-			SetTextComponentFormat('STRING')
-			AddTextComponentString(_U('advertise'))
-            DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-		else
-			isInMarker = false
-		end
-		if IsControlJustReleased(0, Keys['E']) and isInMarker == true then			
-			TriggerEvent('Advert')
-		end
-			
-	end
+        local playerPed = PlayerPedId()
+        local inMarker = false
+        local playerCoords = GetEntityCoords(playerPed)
+        local distance = Vdist(playerCoords, Config.Location.x, Config.Location.y, Config.Location.z)
+
+        if distance < 15.0 then
+            
+            DrawMarker(Config.MarkerType, Config.Location.x, Config.Location.y, Config.Location.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 1.0, 1.0, 1.0, 200, 55, 50, 100, false, true, 2, true, false, false, false)
+
+            if GetDistanceBetweenCoords(playerCoords, Config.Location.x, Config.Location.y, Config.Location.z, true) < 1.5 then
+                inMarker = true
+                SetTextComponentFormat('STRING')
+			    AddTextComponentString(_U('advertise'))
+                DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+            else
+                inMarker = false
+            end
+
+            if IsControlJustReleased(0, Keys['E']) and inMarker == true then		
+                TriggerEvent('Advert')
+            end
+        end
+    end
 end)
 
 
 -- Blip
 
-local blips = {
-	{title="Weazel News", colour=5, id=682, x = -594.37426757812, y = -929.93981933594, z = 23.86962890625}
-}
-
 Citizen.CreateThread(function()
-
-    for _, info in pairs(blips) do
-      info.blip = AddBlipForCoord(info.x, info.y, info.z)
-      SetBlipSprite(info.blip, info.id)
-      SetBlipDisplay(info.blip, 4)
-      SetBlipScale(info.blip, 0.8)
-      SetBlipColour(info.blip, info.colour)
-      SetBlipAsShortRange(info.blip, true)
-	  BeginTextCommandSetBlipName("STRING")
-      AddTextComponentString(info.title)
-      EndTextCommandSetBlipName(info.blip)
-    end
+    blip = AddBlipForCoord(Config.Location.x, Config.Location.y, Config.Location.z)
+    SetBlipSprite(blip, Config.Sprite)
+    SetBlipDisplay(blip, 4)
+    SetBlipScale(blip, Config.Scale)
+    SetBlipColour(blip, 5)
+    SetBlipAsShortRange(blip, true)
+	BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString(_U('blip'))
+    EndTextCommandSetBlipName(blip)
 end)
 
