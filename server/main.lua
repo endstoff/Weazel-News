@@ -45,12 +45,3 @@ AddEventHandler('SyncAdvert', function(inputText)
 	end		
 	
 end)
-
-
-if (GetCurrentResourceName() ~= "est_Weazel-News") then
-   	print( "^1ERROR: Resource name is not est_Weazel-News, expect there to be issues with the resource. To ensure there are no issues, please leave the resource name as est_Weazel-News!^0\n\n" )
-else
-   	print("^1=======================================================================^0")
-  	print("^2v2.0^0 est_Weazel-News ^3started ^0successfully! made by ^9endstoff^0")
- 	print("^1=======================================================================^0")
-end
