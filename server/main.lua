@@ -1,15 +1,13 @@
 ESX = nil
-
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-
-local lastAdDate 			   = 0
+local lastAdDate = 0
+local webhook = ""
 
 RegisterServerEvent("SyncAdvert")
 AddEventHandler('SyncAdvert', function(inputText)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
-
 
 	if os.time(os.date("!*t")) > (lastAdDate + Config.Cooldown) then
 		lastAdDate = os.time(os.date("!*t"))
@@ -20,7 +18,7 @@ AddEventHandler('SyncAdvert', function(inputText)
 
 		TriggerClientEvent('DisplayAdvert', -1, inputText, xPlayer.getName())
 			
-			PerformHttpRequest(Config.Webhook, function(err, text, headers) end, "POST", json.encode({
+			PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({
 				["username"] = Config.Username,
 				["avatar_url"] = Config.Logo,
 					embeds = {{
