@@ -15,7 +15,6 @@ Config.Sprite = 682
 Config.Scale = 0.8
 
 -- Discord Webhook
-Config.Webhook      = ""
 Config.Username     = "Weazel News"
 Config.Logo         = "https://i.imgur.com/kbwaL85.jpg"
 Config.AuthorIcon   = "https://i.imgur.com/VYeiQRL.png"
